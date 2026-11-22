@@ -11,3 +11,7 @@
        (let ([node (car pending)])
          (cons (car node)
                (visit (caddr node) (cdr pending))))])))
+
+(define (print-inorder tree)
+  (display (my-inorder tree))
+  (newline))
