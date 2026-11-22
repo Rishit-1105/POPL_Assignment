@@ -61,3 +61,27 @@ clue(7, S) :-
 clue(8, S) :-
     member(p(_, research, Lang, data), S),
     \+ Lang = javascript.
+
+%!  main is det.
+%
+%   Finds one solution satisfying clues 1 to 8 and prints it formatted
+%   across four lines in the order Alex, Ben, Carla, Dana.
+main :-
+    candidate(S),
+    clue(1, S),
+    clue(2, S),
+    clue(3, S),
+    clue(4, S),
+    clue(5, S),
+    clue(6, S),
+    clue(7, S),
+    clue(8, S),
+    !,
+    S = [p('Alex', DA, LA, PA),
+         p('Ben', DB, LB, PB),
+         p('Carla', DC, LC, PC),
+         p('Dana', DD, LD, PD)],
+    format('Alex = [~w, ~w, ~w]~n', [DA, LA, PA]),
+    format('Ben = [~w, ~w, ~w]~n', [DB, LB, PB]),
+    format('Carla = [~w, ~w, ~w]~n', [DC, LC, PC]),
+    format('Dana = [~w, ~w, ~w]~n', [DD, LD, PD]).
