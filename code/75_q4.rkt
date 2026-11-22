@@ -30,3 +30,17 @@
       '()
       (cons (f (car lst))
             (my-map f (cdr lst)))))
+
+;; insert-if-short : atom proper list nonnegative integer -> proper list
+;; Insert x at the front of each list shorter than n, including empty lists.
+;; Measure each original list before rebuilding its nested elements.
+(define (insert-if-short x lst n)
+  (let* ([original-length (my-length lst)]
+         [mapped (my-map (lambda (item)
+                           (if (or (pair? item) (null? item))
+                               (insert-if-short x item n)
+                               item))
+                         lst)])
+    (if (< original-length n)
+        (cons x mapped)
+        mapped)))
