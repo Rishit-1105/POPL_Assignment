@@ -31,6 +31,22 @@
       (cons (f (car lst))
             (my-map f (cdr lst)))))
 
+;; make-inserter : atom (nonnegative integer -> Boolean) -> (proper list -> proper list)
+;; Return a function that inserts x into each list accepted by len-ok?.
+;; Each recursive call measures its original list before rebuilding child lists.
+(define (make-inserter x len-ok?)
+  (letrec ([insert (lambda (lst)
+                     (let* ([original-length (my-length lst)]
+                            [mapped (my-map (lambda (item)
+                                              (if (or (pair? item) (null? item))
+                                                  (insert item)
+                                                  item))
+                                            lst)])
+                       (if (len-ok? original-length)
+                           (cons x mapped)
+                           mapped)))])
+    insert))
+
 ;; insert-if-short : atom proper list nonnegative integer -> proper list
 ;; Insert x at the front of each list shorter than n, including empty lists.
 ;; Measure each original list before rebuilding its nested elements.

@@ -10,6 +10,12 @@
 ;; my-map: one output per top-level element, in order
 (q4-check (my-map (lambda (x) (pair? x)) '(a (1) ())) '(#f #t #f))
 
+;; make-inserter: a custom check applies to both the outer and inner lists
+(q4-check ((make-inserter 'x (lambda (len) (= len 2))) '((a b) ())) '(x (x a b) ()))
+
+;; make-inserter: an empty top-level list is still eligible
+(q4-check ((make-inserter 'z (lambda (len) (= len 0))) '()) '(z))
+
 ;; S2 example 1
 (q4-check (insert-if-short 42 '((1 2) (3 4 5) (6) ()) 3) '((42 1 2) (3 4 5) (42 6) (42)))
 
