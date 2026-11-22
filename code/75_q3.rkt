@@ -63,3 +63,7 @@
         (if (and (null? left) (null? right))
             1
             (+ (my-leaf-count left) (my-leaf-count right))))))
+
+(define (print-height-and-leaves tree)
+  (display (list (my-height tree) (my-leaf-count tree)))
+  (newline))
