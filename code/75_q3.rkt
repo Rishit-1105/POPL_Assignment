@@ -40,3 +40,11 @@
          (if (cdr frame)
              (cons (car node) (visit '() remaining))
              (visit (caddr node) (cons (cons node #t) remaining))))])))
+
+(define (print-all-traversals tree)
+  (display (my-inorder tree))
+  (newline)
+  (display (my-preorder tree))
+  (newline)
+  (display (my-postorder tree))
+  (newline))
