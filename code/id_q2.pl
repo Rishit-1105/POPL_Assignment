@@ -41,3 +41,14 @@ apply_op('/', A, B, V) :-
     B =\= 0,
     0 is A mod B,
     V is A // B.
+
+% expr_over(+List, -Tree, -Value) enumerates expressions in list order.
+expr_over([Number], Number, Number) :-
+    integer(Number).
+expr_over(List, op(O, A, B), Value) :-
+    append(Left, Right, List),
+    Left = [_|_],
+    Right = [_|_],
+    expr_over(Left, A, AValue),
+    expr_over(Right, B, BValue),
+    apply_op(O, AValue, BValue, Value).
