@@ -11,3 +11,12 @@
 ;;; Forbidden: set! and relatives, vectors, hash tables, strings,
 ;;;   loops (do, for), length, append, reverse, map, filter, member,
 ;;;   memq, list-ref, list-tail. Write helpers such as my-length and my-map.
+
+;; my-length : proper list -> nonnegative integer
+;; Count top-level elements; a sublist counts as one element.
+;; The loop carries a count as it advances by cdr, with the call in tail position.
+(define (my-length lst)
+  (let loop ([remaining lst] [count 0])
+    (if (null? remaining)
+        count
+        (loop (cdr remaining) (+ count 1)))))
