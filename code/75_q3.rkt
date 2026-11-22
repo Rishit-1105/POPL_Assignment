@@ -48,3 +48,9 @@
   (newline)
   (display (my-postorder tree))
   (newline))
+
+(define (my-height tree)
+  (if (null? tree)
+      0
+      (+ 1 (max (my-height (cadr tree))
+                (my-height (caddr tree))))))
