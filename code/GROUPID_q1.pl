@@ -85,3 +85,11 @@ main :-
     format('Ben = [~w, ~w, ~w]~n', [DB, LB, PB]),
     format('Carla = [~w, ~w, ~w]~n', [DC, LC, PC]),
     format('Dana = [~w, ~w, ~w]~n', [DD, LD, PD]).
+
+%!  count_solutions(+Active:list(integer), -N:integer) is det.
+%
+%   N is the number of solutions from candidate/1 that satisfy
+%   every clue identified by a number in Active.
+count_solutions(Active, N) :-
+    findall(S, (candidate(S), forall(member(K, Active), clue(K, S))), Solutions),
+    length(Solutions, N).
