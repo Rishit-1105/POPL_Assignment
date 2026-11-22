@@ -44,3 +44,12 @@
     (if (< original-length n)
         (cons x mapped)
         mapped)))
+
+;; print-insert-result : -> void
+;; Read x, lst, and n in order; display only the resulting list and a newline.
+(define (print-insert-result)
+  (let* ([x (read)]
+         [lst (read)]
+         [n (read)])
+    (display (insert-if-short x lst n))
+    (newline)))
