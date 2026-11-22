@@ -20,3 +20,13 @@
     (if (null? remaining)
         count
         (loop (cdr remaining) (+ count 1)))))
+
+;; my-map : (Any -> Any) proper list -> proper list
+;; Apply f to each top-level element, preserving their order.
+;; The empty list ends the recursion; each step conses the mapped head
+;; onto the result of mapping the tail.
+(define (my-map f lst)
+  (if (null? lst)
+      '()
+      (cons (f (car lst))
+            (my-map f (cdr lst)))))
