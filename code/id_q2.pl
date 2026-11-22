@@ -63,3 +63,8 @@ generate_equation(List, Equation) :-
     expr_string(LeftTree, LeftString),
     expr_string(RightTree, RightString),
     format(string(Equation), '~s=~s', [LeftString, RightString]).
+
+% all_equations(+List, -Equations) collects sorted, duplicate-free equations.
+all_equations(List, Equations) :-
+    findall(Equation, generate_equation(List, Equation), AllEquations),
+    sort(AllEquations, Equations).
