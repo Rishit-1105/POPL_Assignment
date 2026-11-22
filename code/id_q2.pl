@@ -21,3 +21,23 @@ expr_string(op(O, A, B), String) :-
     ;   Right = BString
     ),
     format(string(String), '~s~a~s', [Left, O, Right]).
+
+% apply_op(?O, +A, +B, -V) applies an operator to integer operands.
+apply_op('+', A, B, V) :-
+    integer(A),
+    integer(B),
+    V is A + B.
+apply_op('-', A, B, V) :-
+    integer(A),
+    integer(B),
+    V is A - B.
+apply_op('*', A, B, V) :-
+    integer(A),
+    integer(B),
+    V is A * B.
+apply_op('/', A, B, V) :-
+    integer(A),
+    integer(B),
+    B =\= 0,
+    0 is A mod B,
+    V is A // B.
