@@ -52,3 +52,14 @@ expr_over(List, op(O, A, B), Value) :-
     expr_over(Left, A, AValue),
     expr_over(Right, B, BValue),
     apply_op(O, AValue, BValue, Value).
+
+% generate_equation(+List, -Equation) renders equal-valued expressions.
+generate_equation(List, Equation) :-
+    append(Left, Right, List),
+    Left = [_|_],
+    Right = [_|_],
+    expr_over(Left, LeftTree, Value),
+    expr_over(Right, RightTree, Value),
+    expr_string(LeftTree, LeftString),
+    expr_string(RightTree, RightString),
+    format(string(Equation), '~s=~s', [LeftString, RightString]).
