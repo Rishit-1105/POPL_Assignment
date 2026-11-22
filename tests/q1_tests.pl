@@ -2,10 +2,10 @@
 :- use_module(library(apply)).
 
 % Load solution file relative to either repository root or tests/ directory.
-:- (   exists_file('../code/GROUPID_q1.pl')
-   ->  consult('../code/GROUPID_q1.pl')
-   ;   exists_file('code/GROUPID_q1.pl')
-   ->  consult('code/GROUPID_q1.pl')
+:- (   exists_file('../code/75_q1.pl')
+   ->  consult('../code/75_q1.pl')
+   ;   exists_file('code/75_q1.pl')
+   ->  consult('code/75_q1.pl')
    ;   true
    ).
 
