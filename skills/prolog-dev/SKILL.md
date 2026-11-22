@@ -53,8 +53,8 @@ Run goals explicitly from the repository root:
 
 ```sh
 swipl -q -f file.pl -g "goal" -t halt
-swipl -q -f code/id_q2.pl -g "all_equations([4,2,5,3], Es)" -t halt
-swipl -q -f tests/id_q2_tests.pl -g "run_q2_tests" -t halt
+swipl -q -f code/75_q2.pl -g "all_equations([4,2,5,3], Es)" -t halt
+swipl -q -f tests/75_q2_tests.pl -g "run_q2_tests" -t halt
 ```
 
 The command-line `-t halt` is permitted; do not put a halt call in a source file.

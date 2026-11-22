@@ -1,7 +1,7 @@
 % Run from the repository root:
-% swipl -q -f tests/id_q2_tests.pl -g run_q2_tests -t halt
+% swipl -q -f tests/75_q2_tests.pl -g run_q2_tests -t halt
 % Loading this file does not run tests or print anything.
-:- ensure_loaded('../code/id_q2.pl').
+:- ensure_loaded('../code/75_q2.pl').
 
 q2_expected_examples([
     "4*2-5=3", "4*2=5+3", "4-2=5-3", "4/2=5-3",
