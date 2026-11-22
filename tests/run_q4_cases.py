@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 
@@ -68,6 +69,7 @@ def main():
             shutil.copyfile(args.source, combined)
             with combined.open("a", encoding="utf-8") as output:
                 output.write("\n" + CHECK_HELPER + "\n" + form + "\n")
+            started = time.perf_counter()
             try:
                 result = subprocess.run(
                     [racket, str(combined)], cwd=ROOT, stdin=subprocess.DEVNULL,
@@ -76,13 +78,14 @@ def main():
             except subprocess.TimeoutExpired:
                 print(f"ERROR {label}: timed out after 30 seconds")
                 continue
+            elapsed = time.perf_counter() - started
 
             if result.returncode == 0 and result.stdout == "PASS\n":
                 passed += 1
-                print(f"PASS  {label}")
+                print(f"PASS  {label} ({elapsed:.2f}s)")
             else:
                 status = "FAIL" if result.stdout.startswith("FAIL:") else "ERROR"
-                print(f"{status}  {label}")
+                print(f"{status}  {label} ({elapsed:.2f}s)")
                 if result.stdout.strip():
                     print(result.stdout.rstrip())
                 if result.stderr.strip():
