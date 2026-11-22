@@ -54,3 +54,12 @@
       0
       (+ 1 (max (my-height (cadr tree))
                 (my-height (caddr tree))))))
+
+(define (my-leaf-count tree)
+  (if (null? tree)
+      0
+      (let ([left (cadr tree)]
+            [right (caddr tree)])
+        (if (and (null? left) (null? right))
+            1
+            (+ (my-leaf-count left) (my-leaf-count right))))))
