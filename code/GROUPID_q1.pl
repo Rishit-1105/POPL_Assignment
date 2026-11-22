@@ -62,6 +62,10 @@ clue(8, S) :-
     member(p(_, research, Lang, data), S),
     \+ Lang = javascript.
 
+% CLUE 9: The friend whose favorite language is Java prefers embedded projects.
+clue(9, S) :-
+    member(p(_, _, java, embedded), S).
+
 %!  main is det.
 %
 %   Finds one solution satisfying clues 1 to 8 and prints it formatted
