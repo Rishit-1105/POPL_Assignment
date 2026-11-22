@@ -25,3 +25,18 @@
              (visit (cadr subtree) (cons (caddr subtree) pending)))]
       [(null? pending) '()]
       [else (visit (car pending) (cdr pending))])))
+
+(define (my-postorder tree)
+  ;; Each pending frame pairs a node with a flag for whether its right subtree has started.
+  (let visit ([subtree tree] [pending '()])
+    (cond
+      [(not (null? subtree))
+       (visit (cadr subtree) (cons (cons subtree #f) pending))]
+      [(null? pending) '()]
+      [else
+       (let* ([frame (car pending)]
+              [node (car frame)]
+              [remaining (cdr pending)])
+         (if (cdr frame)
+             (cons (car node) (visit '() remaining))
+             (visit (caddr node) (cons (cons node #t) remaining))))])))
