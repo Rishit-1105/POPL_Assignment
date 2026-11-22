@@ -34,6 +34,8 @@
 ;; make-inserter : atom (nonnegative integer -> Boolean) -> (proper list -> proper list)
 ;; Return a function that inserts x into each list accepted by len-ok?.
 ;; Each recursive call measures its original list before rebuilding child lists.
+;; The inner recursion uses my-map to descend into each child list, leaving atoms
+;; unchanged, then prepends x if len-ok? accepts the original length.
 (define (make-inserter x len-ok?)
   (letrec ([insert (lambda (lst)
                      (let* ([original-length (my-length lst)]
